@@ -1,0 +1,8 @@
+# Edit with `crontab -e`. Paths assume the repo lives in ~/InvestmentBotOB with a venv in .venv.
+# Times are the machine's local time; US market closes 16:00 New York time.
+
+# Trade once a day, after the close, Mon-Fri
+15 16 * * 1-5  cd ~/InvestmentBotOB && .venv/bin/python -m tradebot run     >> state/cron.log 2>&1
+
+# Night shift: review + write proposals (never applies them)
+30 2 * * 2-6   cd ~/InvestmentBotOB && .venv/bin/python -m tradebot nightly >> state/cron.log 2>&1
