@@ -1,0 +1,56 @@
+# Copy to config.toml and edit. Anything omitted uses the defaults in tradebot/config.py.
+# Broker API keys go in environment variables (ALPACA_API_KEY / ALPACA_API_SECRET), never here.
+
+[general]
+symbol = "SPY"
+data_source = "yfinance"
+csv_path = "data/prices.csv"
+start = "2005-01-01"
+state_dir = "state"
+proposals_dir = "proposals"
+
+[broker]
+kind = "paper"
+initial_cash = 100000.0
+slippage_bps = 5.0
+alpaca_base_url = "https://paper-api.alpaca.markets"
+allow_live = false
+
+[risk]
+max_drawdown = 0.15
+max_position_pct = 1.0
+max_order_pct = 0.5
+kill_switch_file = "KILL"
+
+[regime]
+vol_window = 20
+vol_lookback = 252
+vol_high = 0.8
+er_window = 20
+er_low = 0.25
+dd_lookback = 252
+crash_dd = 0.15
+crash_mom = 0.1
+
+[strategy]
+trend_window = 200
+bb_window = 20
+mr_scale = 0.25
+target_vol = 0.12
+cost_bps = 5.0
+
+[gate]
+enforce = true
+metric = "sharpe"
+train_years = 3
+test_years = 1
+min_fold_win_rate = 0.5
+max_age_days = 7
+
+[gate.grid]
+trend_window = [100, 200]
+target_vol = [0.1, 0.15]
+
+[nightly]
+min_improvement = 0.05
+max_proposals = 3
